@@ -1,0 +1,50 @@
+version: '3.8'
+
+services:
+  
+  app:
+    tty: true
+    build:
+      context: .
+      dockerfile: app.dockerfile
+    image: wonduko/yolo-app:1.0
+    container_name: yolo-app
+    ports:
+      - '8000:8000'
+    networks:
+      - my_network
+    depends_on:
+      - mongo
+  
+  backend:
+    build:
+      context: .
+      dockerfile: backend.dockerfile
+    image: wonduko/yolo:1.0
+    container_name: yolo-backend
+    ports:
+      - '5000:5000'
+    networks:
+      - my_network
+    depends_on:
+      - mongo
+
+  mongo:
+    image: mongo
+    container_name: mongodb
+    ports:
+      - '27017:27017'
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: password
+    volumes:
+      - database:/data/db
+    networks:
+      - my_network
+
+volumes:
+  database:
+
+networks:
+  my_network:
+    driver: bridge
