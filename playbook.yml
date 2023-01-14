@@ -36,3 +36,9 @@
     - name: Clone a github repository
       shell:
         cmd: "git clone https://github.com/mburah/yolo.git"
+
+    - name: Start containers
+      become: true
+      shell:
+        cmd: "docker-compose -f docker-compose.yml up -d"
+        chdir: /home/vagrant/yolo/
