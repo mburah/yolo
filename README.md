@@ -14,9 +14,11 @@ Make sure that you have the following installed:
 
 ## Run the folllowing command to install the dependencies 
  `npm install`
+  vagrant init ubuntu/focal64
+
 
 ## Run the folllowing to start the app
- `npm start`
+  vagrant up
 
 ## Open a new terminal and run the same commands in the backend folder
  `cd ../backend`
